@@ -134,7 +134,7 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
         
       if(nchar(val_d_fmt) > size_fmt){
         if(grepl(".", val_d_fmt)){
-          warning(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))
+          if(as.numeric(val_d_fmt)!=-99){warning(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))}
         }else{
           stop(paste0("Input parameter: ",d,":",val_d," has precision = 0 and is too high for DSSAT fmt. Please review value and precision in file temp_sol.csv"))
         }
