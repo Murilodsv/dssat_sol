@@ -62,14 +62,6 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
   if(missing(wd)){wd = getwd()}
   if(missing(f_head)){f_head = F}
   
-  #--- Check constants
-  if(!file.exists(paste0(wd,"/temp.sol"))){
-    stop(paste("Master soil file temp.sol not found in:",wd))
-  }
-  if(!file.exists(paste0(wd,"/temp_sol.csv"))){
-    stop(paste("Master soil file temp_sol.csv not found in:",wd))
-  }
-  
   #--- master file
   msol      = c(
   "*Soils: Murilo Vianna (MV) Soil Template for DSSAT",
@@ -134,14 +126,14 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
         
       if(nchar(val_d_fmt) > size_fmt){
         if(grepl(".", val_d_fmt)){
-          if(as.numeric(val_d_fmt)!=-99){warning(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))}
+          if(as.numeric(val_d_fmt)!=-99){message(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))}
         }else{
           stop(paste0("Input parameter: ",d,":",val_d," has precision = 0 and is too high for DSSAT fmt. Please review value and precision in file temp_sol.csv"))
         }
       }
       
       if(!grepl(".", val_d_fmt)){
-        warning(paste0("Input parameter: ",d,":",val_d," has precision = 0 on the temp_sol.csv file. One point precision was added to meet DSSAT fmt."))
+        message(paste0("Input parameter: ",d,":",val_d," has precision = 0 on the temp_sol.csv file. One point precision was added to meet DSSAT fmt."))
         val_d_fmt =
           sprintf(paste0("%",size_fmt,".",1,"f"), as.numeric(val_d))
       }
@@ -152,7 +144,7 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
         sprintf(paste0("%",size_fmt,".",0,"f"), as.numeric(val_d))
       
       if(nchar(val_d_fmt) > size_fmt){
-          warning(paste0("Input parameter: ",d,":",val_d," is too high. Data is reduced. Please review value and unit (cm) of inputed data"))
+        message(paste0("Input parameter: ",d,":",val_d," is too high. Data is reduced. Please review value and unit (cm) of inputed data"))
           val_d_fmt = substr(val_d_fmt,1,size_fmt)    
       }
       
@@ -160,7 +152,7 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
       #--- Character data
       val_d_fmt = substr(val_d, 1,size_fmt)
       if(nchar(val_d)>size_fmt){
-        warning(paste0("Input parameter: ",d,":",val_d," was trimmed to meet DSSAT fmt. New value: '",val_d_fmt,"'"))
+        message(paste0("Input parameter: ",d,":",val_d," was trimmed to meet DSSAT fmt. New value: '",val_d_fmt,"'"))
       }
       
       if(nchar(val_d_fmt) < size_fmt){
@@ -216,14 +208,14 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
       
       if(nchar(val_d_fmt) > size_fmt){
         if(grepl(".", val_d_fmt)){
-          warning(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))
+          message(paste0("Input parameter: ",d,":",val_d," is too high for DSSAT fmt."))
         }else{
           stop(paste0("Input parameter: ",d,":",val_d," has precision = 0 and is too high for DSSAT fmt. Please review value and precision in file temp_sol.csv"))
         }
       }
       
       if(!grepl(".", val_d_fmt)){
-        warning(paste0("Input parameter: ",d,":",val_d," has precision = 0 on the temp_sol.csv file. One point precision was added to meet DSSAT fmt."))
+        message(paste0("Input parameter: ",d,":",val_d," has precision = 0 on the temp_sol.csv file. One point precision was added to meet DSSAT fmt."))
         val_d_fmt =
           sprintf(paste0("%",size_fmt,".",1,"f"), as.numeric(val_d))
       }
@@ -234,7 +226,7 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
         sprintf(paste0("%",size_fmt,".",0,"f"), as.numeric(val_d))
       
       if(nchar(val_d_fmt) > size_fmt){
-        warning(paste0("Input parameter: ",d,":",val_d," is too high. Data is reduced. Please review value and unit (cm) of inputed data"))
+        message(paste0("Input parameter: ",d,":",val_d," is too high. Data is reduced. Please review value and unit (cm) of inputed data"))
         val_d_fmt = substr(val_d_fmt,1,size_fmt)    
       }
       
@@ -242,7 +234,7 @@ ds_sol = function(soil_id,max_dp,site,country,lat,lon,soil_class,
       #--- Character data
       val_d_fmt = substr(val_d, 1,size_fmt)
       if(nchar(val_d)>size_fmt){
-        warning(paste0("Input parameter: ",d,":",val_d," was trimmed to meet DSSAT fmt. New value: '",val_d_fmt,"'"))
+        message(paste0("Input parameter: ",d,":",val_d," was trimmed to meet DSSAT fmt. New value: '",val_d_fmt,"'"))
       }
       
       if(nchar(val_d_fmt) < size_fmt){
